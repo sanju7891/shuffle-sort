@@ -1,0 +1,233 @@
+<style>
+  .body {
+    background-color: #efefef;
+  }
+
+  #container {
+    width: 100%;
+    height: auto;
+    background-color: #efefef;
+  }
+
+  #shuffle-container {
+    background: #bfbfbf;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #shuffle-container>.card {
+    flex: 1 1 30%;
+    height: 200px;
+    text-align: center;
+    color: #ffffff;
+    font-size: 100px;
+  }
+
+  .made-by {
+    text-align: center !important;
+    padding-bottom: 50px;
+  }
+
+  .btn_shuffle,
+  .btn_sort {
+    float: right;
+    width: 143px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    height: 30px;
+    margin: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid #72c3dc;
+    color: #ffffff;
+    background-color: #72c3dc;
+  }
+
+  .btn_sort {
+    margin-top: 50px;
+    margin-right: -164px;
+  }
+
+  .card:nth-child(1),
+  .card:nth-child(8) {
+    background: #6f98a8;
+  }
+
+  .card:nth-child(2),
+  .card:nth-child(4) {
+    background: #2b8ead;
+  }
+
+  .card:nth-child(6),
+  .card:nth-child(7) {
+    background: #bfbfbf;
+  }
+
+  .card:nth-child(3),
+  .card:nth-child(5),
+  .card:nth-child(9) {
+    background: #2f454e;
+  }
+
+  @media only screen and (min-device-width: 320px) and (max-device-width: 375px) {
+
+    .btn_shuffle,
+    .btn_sort {
+      float: none;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    }
+
+    #btns {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+      margin-top: 30px;
+    }
+
+    .btn_shuffle,
+    .btn_sort {
+      margin: 0px !important;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+
+    }
+
+    .btn_sort {
+      margin: 0px !important;
+    }
+
+    #container,
+    #shuffle-container {
+      background-color: #ffffff;
+    }
+
+    #shuffle-container>.card {
+      flex: 1 1 70%;
+      color: #000;
+      border-bottom: 10px solid #fff;
+    }
+
+
+
+    .card:nth-child(1),
+    .card:nth-child(8) {
+      /* background: linear-gradient(to right,#6f98a8 1%,#EFEFEF 99%); */
+      background: linear-gradient(to right,
+          #6f98a8 0%,
+          #6f98a8 5%,
+          #f6f6f6 5%,
+          #f6f6f6 95%);
+    }
+
+    .card:nth-child(2),
+    .card:nth-child(4) {
+      /* background: linear-gradient(to right,#2B8EAD 1%,#EFEFEF 99%); */
+      background: linear-gradient(to right,
+          #2b8ead 0%,
+          #2b8ead 5%,
+          #f6f6f6 5%,
+          #f6f6f6 95%);
+    }
+
+    .card:nth-child(6),
+    .card:nth-child(7) {
+      /* background: linear-gradient(to right,#BFBFBF 1%,#EFEFEF 99%); */
+      background: linear-gradient(to right,
+          #bfbfbf 0%,
+          #bfbfbf 5%,
+          #f6f6f6 5%,
+          #f6f6f6 95%);
+    }
+
+    .card:nth-child(3),
+    .card:nth-child(5),
+    .card:nth-child(9) {
+      /* background: linear-gradient(to right,#2F454E 1%,#EFEFEF 99%); */
+      background: linear-gradient(to right,
+          #2f454e 0%,
+          #2f454e 5%,
+          #f6f6f6 5%,
+          #f6f6f6 95%);
+    }
+  }
+</style>
+
+
+
+<!-- html -->
+
+
+<div id="container">
+  <div id="btns">
+    <button class="btn_shuffle" id="shuffle" onclick="y();">
+      Shuffle
+    </button>
+    <button class="btn_sort" onclick="sort();">Sort</button>
+  </div>
+  <div id="shuffle-container"></div>
+
+  <div>
+    <p class="made-by">Shuffle and sort by Sandeep Saraf</p>
+
+  </div>
+</div>
+
+
+
+
+<!-- javascript -->
+
+<script>
+  const cardboard = document.getElementById("shuffle-container");
+  function x() {
+    for (var i = 1; i <= 9; i++) {
+      cardboard.innerHTML += '<span class="card">' + i + "</span>";
+    }
+  }
+
+  function y() {
+    var cardNumbers = [];
+    var card = document.querySelectorAll("span");
+    document.querySelectorAll("span").forEach(v => {
+      cardNumbers.push(v.innerHTML);
+    });
+
+    var theLength = cardNumbers.length - 1;
+    var swap;
+    var temp;
+
+    for (var i = theLength; i > 0; i--) {
+      swap = Math.floor(Math.random() * (i + 1));
+      temp = cardNumbers[i];
+      cardNumbers[i] = cardNumbers[swap];
+      cardNumbers[swap] = temp;
+    }
+
+    i = 0;
+    document.querySelectorAll("span").forEach(v => {
+      v.innerHTML = cardNumbers[i];
+      i++;
+    });
+  }
+
+  x();
+
+  function sort() {
+    var cardNumbers = [];
+
+    document.querySelectorAll("span").forEach(v => {
+      cardNumbers.push(+v.innerHTML);
+    });
+
+    cardNumbers.sort();
+
+    i = 0;
+
+    document.querySelectorAll("span").forEach(v => {
+      v.innerHTML = cardNumbers[i];
+      i++;
+    });
+  }
+</script>
